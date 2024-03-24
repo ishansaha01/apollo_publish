@@ -14,7 +14,7 @@ renderer.setSize( window.innerWidth*.99, window.innerHeight*.8);
 document.body.appendChild( renderer.domElement );
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.maxDistance = 3;
-controls.minDistance = .3;
+controls.minDistance = .25;
 
 
 
@@ -52,7 +52,7 @@ const earth = new THREE.Mesh( earthGeo, earthMat );
 scene.add( earth );
 earth.position.set(2, 0, 0);
 
-var light = new THREE.AmbientLight( 0x888888 );
+var light = new THREE.AmbientLight( 0x555859 );
 scene.add( light );
 
 
