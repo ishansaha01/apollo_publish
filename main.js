@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { MeshStandardMaterial } from 'three';
 import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
@@ -12,6 +13,9 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth*.99, window.innerHeight*.8);
 document.body.appendChild( renderer.domElement );
 const controls = new OrbitControls( camera, renderer.domElement );
+controls.maxDistance = 3;
+controls.minDistance = .3;
+
 
 
 var points = [];
@@ -23,18 +27,26 @@ const mesh = new THREE.Mesh(line, material);
 scene.add(mesh);
 
 
+const bgGeometry = new THREE.SphereGeometry(80, 200, 200);
+const bgText = new THREE.TextureLoader().load("eso0932av2.jpeg");
+bgText.colorSpace = THREE.SRGBColorSpace;
+const bgMat = new THREE.MeshBasicMaterial( { map:bgText, side: THREE.DoubleSide } );
+const bg = new THREE.Mesh(bgGeometry, bgMat);
+scene.add(bg)
+bg.position.set(0, 0, 0)
 
 const moonGeo = new THREE.SphereGeometry( 0.05, 60, 60 );
 const moonText = new THREE.TextureLoader().load("lroc_color_poles_1k.jpg");
 moonText.colorSpace = THREE.SRGBColorSpace;
-const moonMat = new THREE.MeshBasicMaterial( { map:moonText } );
+const moonMat = new THREE.MeshBasicMaterial( { map:moonText} );
 const moon = new THREE.Mesh( moonGeo, moonMat );
 scene.add( moon );
 moon.position.set(.07, 0, 0);
 
 const earthGeo = new THREE.SphereGeometry( .15, 60, 60 );
-const earthText = new THREE.TextureLoader().load("earth_texture.jpg");
+const earthText = new THREE.TextureLoader().load("earthmap1k.jpg");
 earthText.colorSpace = THREE.SRGBColorSpace;
+earthText.rotation = 0;
 const earthMat = new THREE.MeshBasicMaterial( { map:earthText } );
 const earth = new THREE.Mesh( earthGeo, earthMat );
 scene.add( earth );
