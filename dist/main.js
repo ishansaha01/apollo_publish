@@ -13,8 +13,8 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth*.99, window.innerHeight*.8);
 document.body.appendChild( renderer.domElement );
 const controls = new OrbitControls( camera, renderer.domElement );
-controls.maxDistance = 3;
-controls.minDistance = .25;
+controls.maxDistance = 4;
+controls.minDistance = .21;
 
 
 
